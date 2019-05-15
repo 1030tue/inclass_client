@@ -31,3 +31,38 @@
     transform: rotate(360deg);
   }
 }
+
+
+.topnav {
+  overflow: hidden;
+  background-color: #68C7C1;
+}
+
+.topnav:hover {
+  background-color: #83CABD;
+}
+
+.topnav h1{
+  float: Auto;
+  background-color: #68C7C1;
+  padding-right: 5em;
+}
+
+.topnav span{
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav span:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
