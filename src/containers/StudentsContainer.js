@@ -1,17 +1,24 @@
 import React from "react";
+
 import StudentCard from "../Components/StudentCard"
 import NewStudentForm from "../Components/NewStudentForm"
+import BathroomPage from "./BathroomPage"
+
+import { connect } from "react-redux";
+import { selectStudent } from '../actions/bathroom';
+
+import withAuth from '../hocs/withAuth'
 
 
 class StudentsContainer extends React.Component {
   state={
-    clickedbtn: false
+    clickedbtn: false,
+    bathroomStudents:[]
   }
-
 
   newStudntbtn = () =>{
     return (
-      <button className="StudentCard" onClick={this.handleBtn}>+ New Student</button>
+      <button className="button" onClick={this.handleBtn}>+ New Student</button>
     )
   }
 
@@ -21,11 +28,15 @@ class StudentsContainer extends React.Component {
     })
   }
 
+  handleCardClick=(props)=>{
+    this.props.selectStudent(props)
+  }
+
   renderStudent=()=>{
     if(!this.state.clickedbtn){
-      return this.props.period.students.map(s => <StudentCard student={s} key ={s.id} />)
+      return this.props.currentClass.students.map(s => <StudentCard student={s} key ={s.id} handleClick={this.handleCardClick}/>)
     }else{
-      return <NewStudentForm AddNewStudent={this.props.AddNewStudent} />
+      return <NewStudentForm AddNewStudent={this.props.AddNewStudent} period={this.props.period} />
     }
   }
 
@@ -36,10 +47,22 @@ class StudentsContainer extends React.Component {
     {this.renderStudent()}
     </div>
     {!this.state.clickedbtn ? this.newStudntbtn():null }
+    <div className="BathroomPage">
+    <BathroomPage />
+    </div>
     </React.Fragment>
     )
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    currentClass: state.bathroomReducer.curr_class
+  };
+};
 
-export default StudentsContainer;
+
+export default withAuth(connect(mapStateToProps,{ selectStudent })(StudentsContainer));
+
+
+// export default StudentsContainer;

@@ -1,9 +1,33 @@
 import React from "react";
+// import withAuth from '../hocs/withAuth'
+// import { connect } from "react-redux";
+
 
 
 class NewStudentForm extends React.Component{
   state={
   }
+
+  AddNewStudent=(input)=>{
+    fetch(`http://localhost:4000/api/v1/students`, {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          period_id: this.props.period.id,
+          firstname: input.firstname,
+          lastname: input.lastname,
+          email: input.email,
+          age: input.age,
+          grade: input.grade,
+          gender: input.gender,
+          guardians_name: input.guardians_name,
+          relationship_to_student: input.relationship_to_student,
+          guardians_email: input.guardians_email,
+          guardians_phone: input.guardians_phone,
+        })
+      })
+  }
+
 
   capitalize = (s) => {
    if (typeof s !== 'string') return ''
@@ -18,7 +42,7 @@ class NewStudentForm extends React.Component{
   }
 
   handleSubmit = () => {
-    this.props.AddNewStudent(this.state)
+    this.AddNewStudent(this.state)
   }
 
 
@@ -113,20 +137,21 @@ class NewStudentForm extends React.Component{
           </div>
 
           <br/>
-          <input type="submit" className="StudentCard" onClick={this.handleSubmit}/>
+          <input type="submit" className="button" onClick={this.handleSubmit}/>
 
         </form>
     )
   }
 }
 
-export default NewStudentForm;
+// const mapStateToProps = state => {
+//   console.log("inside mapstate", state);
+//   return {
+//     currentTeacher: state.teacherReducer.teacher
+//   };
+// };
+//
+//
+// export default withAuth(connect(mapStateToProps)(NewStudentForm));
 
-// <h3>Add Class to Student </h3>
-// <div className="form-elem">
-// <input
-//     className="input"
-//     type="dropdown"
-//     name="periods"
-// />
-// </div>
+export default NewStudentForm;

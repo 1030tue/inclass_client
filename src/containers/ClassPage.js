@@ -2,6 +2,8 @@ import React from "react";
 import Period from "../Components/Period"
 import StudentsContainer from "./StudentsContainer"
 
+import { Link } from "react-router-dom";
+
 
 class ClassPage extends React.Component {
   state={
@@ -14,12 +16,12 @@ class ClassPage extends React.Component {
       clicked: clicked
     })
   }
-
+// handleClickPeriod={this.handleClickPeriod}
 
 
   renderCards=()=>{
     if(!this.state.clicked){
-      return this.props.periods.map(p => <Period period={p} key={p.id} handleClickPeriod={this.handleClickPeriod}/>)
+      return this.props.periods.map(p => <Period period={p} key={p.id} />)
     }else{
      return <StudentsContainer
             AddNewStudent={this.props.AddNewStudent}
@@ -31,12 +33,23 @@ class ClassPage extends React.Component {
     return(
     <div>
     {this.renderCards()}
+    <br/>
+
+    <Link to = "/class/new" > <button className="StudentCard"> Create New Class </button> </Link>
+
     </div>
     )
   }
 }
-
-
+//
+// const mapStateToProps = state => {
+//   return {
+//     currentTeacher: state.teacherReducer.teacher
+//   };
+// };
+//
+//
+// export default connect(mapStateToProps)(ClassPage)
 
 
 export default ClassPage
