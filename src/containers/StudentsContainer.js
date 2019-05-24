@@ -1,55 +1,78 @@
 import React from "react";
 
 import StudentCard from "../Components/StudentCard"
-import NewStudentForm from "../Components/NewStudentForm"
 import BathroomPage from "./BathroomPage"
 
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { selectStudent } from '../actions/bathroom';
+import { brStudents, updateClass } from '../actions/bathroom';
 
 import withAuth from '../hocs/withAuth'
 
 
 class StudentsContainer extends React.Component {
-  state={
-    clickedbtn: false,
-    bathroomStudents:[]
-  }
+
+
 
   newStudntbtn = () =>{
     return (
-      <button className="button" onClick={this.handleBtn}>+ New Student</button>
+      <Link to="/students/new">
+      <button className="button">+ New Student</button>
+      </Link>
     )
   }
 
-  handleBtn=()=>{
-    this.setState({
-      clickedbtn: true
+
+
+  handleCardClick=(props, e)=>{
+    return(
+    
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/${props.id}`,
+      {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+         Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        inclass: !props.inclass,
+        student_id: props.id,
+        period_id: this.props.currentClass.id,
+        destination: e.target.value
+      })
+    }).then(res => res.json())
+    .then((data)=> {
+      this.props.brStudents(data)
+      this.props.updateClass(data)
+
     })
+    )
   }
 
-  handleCardClick=(props)=>{
-    this.props.selectStudent(props)
-  }
+
+
+
 
   renderStudent=()=>{
-    if(!this.state.clickedbtn){
       return this.props.currentClass.students.map(s => <StudentCard student={s} key ={s.id} handleClick={this.handleCardClick}/>)
-    }else{
-      return <NewStudentForm AddNewStudent={this.props.AddNewStudent} period={this.props.period} />
-    }
+
   }
 
   render(){
+    console.log("hello", this.props.state)
     return(
     <React.Fragment>
+    {!!this.props.currentClass ? `:${this.props.currentClass.period_num} period` : null}
+     {'   '}
+    {!!this.props.currentClass ? this.props.currentClass.classname : null}
+    {/*<Countdown date={Date.now() + 3600000} /> minutes Left*/}
     <div className="Cards-Container">
+
     {this.renderStudent()}
     </div>
-    {!this.state.clickedbtn ? this.newStudntbtn():null }
-    <div className="BathroomPage">
+    {/*!this.state.clickedbtn ? this.newStudntbtn():null */}
+    {this.newStudntbtn()}
     <BathroomPage />
-    </div>
     </React.Fragment>
     )
   }
@@ -57,12 +80,13 @@ class StudentsContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentClass: state.bathroomReducer.curr_class
+    currentClass: state.bathroomReducer.curr_class,
+    state: state
   };
 };
 
 
-export default withAuth(connect(mapStateToProps,{ selectStudent })(StudentsContainer));
+export default withAuth(connect(mapStateToProps,{ brStudents, updateClass })(StudentsContainer));
 
 
 // export default StudentsContainer;

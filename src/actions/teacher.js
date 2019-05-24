@@ -1,13 +1,13 @@
 
 export const loginTeacher = (email, password) => {
-  return (dispatch) => { //thunk
+  return (dispatch) => {
     // console.log(process.env.REACT_APP_API_ENDPOINT)
     dispatch({ type: 'AUTHENTICATING_TEACHER' })
     // dispatch(authenticatingTeacher())
     // fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`)
     // adapter.loginTeacher(email, password)
     // http://localhost:3000
-    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, { //TODO: move this to an adapter
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export const loginTeacher = (email, password) => {
         console.log('%c INSIDE jsonResponse .THEN', 'color: navy')
         localStorage.setItem('jwt', JSONResponse.jwt) // the magic place to keep our token
         dispatch({ type: 'SET_CURRENT_TEACHER', payload: JSONResponse.teacher })
-        // dispatch(setCurrentTeacher(JSONResponse.teacher))
+
       })
       .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
       // .then((jsonResponse) => {

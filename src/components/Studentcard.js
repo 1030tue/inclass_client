@@ -1,44 +1,46 @@
 import React from "react";
+import StudentSpec from './StudentSpec';
 
-// import withAuth from '../hocs/withAuth'
+import { connect } from "react-redux";
 
 
 class StudentCard extends React.Component {
 
-  newStudntbtn = () =>{
-    return (
-      <button className="StudentCard" onClick={this.renderNewStdFrom}>+ New Student</button>
-    )
-  }
 
+  disableBtns=()=>{
 
-  newStudntbtn = () =>{
-    return (
-      <button className="StudentCard" onClick={console.log}>+ New Student</button>
-    )
   }
 
 
   renderStudent=(student)=>{
-    let btnStyle={
+    let tripBtnStyle={
       backgroundColor: 'transparent',
       borderColor: 'transparent'
     }
-    return (<div className="StudentCard">
+    let cardStyle={
+      backgroundColor: !!student.inclass ? '#9EDCDD' : '#e8ebed'
+    }
+
+    return (<div className="StudentCard" style={cardStyle}>
+            <div >
             {student.firstname}{'  '}{student.lastname}
             {student.gender.toLowerCase()==="female" ? "👩🏻‍🎓": "👨🏻‍🎓"}
+            </div>
             <div>
             {student.inclass ? "IN": "OUT"}
             </div>
-            <input style={btnStyle} type="button" name="destination" value="🧻" onClick={()=>this.props.handleClick(this.props.student)}/>
-            <input style={btnStyle} type="button" name="destination" value="💊"/>
+            <div className="tripBtn" onClick={(e)=>this.props.handleClick(this.props.student, e)} >
+            <input style={tripBtnStyle} data-id={!student.id} type="button" name="destination" value="🧻" disabled={!student.inclass} />
+            <input style={tripBtnStyle} data-id={student.id} type="button" name="destination" value="💊" disabled={!student.inclass}/>
+            <input style={tripBtnStyle} type="button" name="destination" value="Emergency" data-id={student.id} disabled={!student.inclass}/>
             </div>
-    )
+            </div>
+          )
   }
 
 
   render(){
-    console.log(this.props);
+    console.log('hey',this.props);
     return(
       <React.Fragment>
       {this.renderStudent(this.props.student)}
@@ -48,4 +50,6 @@ class StudentCard extends React.Component {
 }
 
 
-export default StudentCard
+
+export default connect()(StudentCard);
+// export default StudentCard

@@ -16,7 +16,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #E7E6D2;
 }
 
 .App-link {
@@ -86,7 +86,7 @@
 
 .StudentCard {
   max-width: 100px;
-  min-height: 100px;
+  min-height: 120px;
   margin: auto;
   text-align: center;
 
@@ -94,7 +94,7 @@
 	text-decoration: none;
 	font-weight: 700;
 	padding: .35em 1em;
-	background-color: #9EDCDD;
+	/* background-color: #9EDCDD; */
 	background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.1));
 	border-radius: 3px;
 	color: rgba(0,0,0,.6);
@@ -104,7 +104,6 @@
 }
 
 .button {
-  max-width: 100px;
   max-height: 100px;
   margin: auto;
   text-align: center;

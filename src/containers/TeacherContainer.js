@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Period from "../Components/Period"
-import ClassPage from "./ClassPage"
+
 import StudentsContainer from "./StudentsContainer"
+import Timer from '../Components/Timer'
 
 import { setCurrentClass } from '../actions/bathroom'
 
@@ -23,7 +24,7 @@ class TeacherContainer extends React.Component {
     })
   }
 
-
+//Set link later
   renderPeriodCards=()=>{
     if(!this.state.clicked){
       let periods= this.props.currentTeacher.periods
@@ -36,17 +37,15 @@ class TeacherContainer extends React.Component {
 
 
 
-
   render(){
     return(
       <React.Fragment>
         <div>
           {!!this.props.currentTeacher? this.props.currentTeacher.fullname: null} {'   '}
-          {!!this.props.currentClass ? `:${this.props.currentClass.period_num}st period` : null}
-           {'   '}
-          {!!this.props.currentClass ? this.props.currentClass.classname : null}
+
         </div>
-          {this.renderPeriodCards()}
+        <Timer/>
+                  {this.renderPeriodCards()}
           <br/>
           {!!this.props.currentClass? null:<Link to = "/class/new" > <button className="button"> Create New Class </button> </Link>
  }

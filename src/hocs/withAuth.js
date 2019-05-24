@@ -13,6 +13,15 @@ const withAuth = /*FUNCTION*/ (WrappedComponent) => {
       // if i have a token but don't know who it belongs to, ask the server for that teacher's data
     }
 
+    repeatStringNumTimes=(string, times)=>{
+      var repeatedString = "";
+      while (times > 0) {
+        repeatedString += string;
+        times--;
+      }
+      return repeatedString;
+    }
+
     render() {
       console.log('%c INSIDE RENDER FOR HOC', 'color: green')
       if (localStorage.getItem('jwt') && this.props.loggedIn) {
@@ -21,7 +30,7 @@ const withAuth = /*FUNCTION*/ (WrappedComponent) => {
         return <WrappedComponent />
       } else if (localStorage.getItem('jwt') && (this.props.authenticatingTeacher || !this.props.loggedIn)) {
         //we're currently fetching, show a loading spinner
-        return "Loading"
+        return this.repeatStringNumTimes("loading  ", 300);
       } else {
         //teacher is not AUTHORIZED to see this component
         return <Redirect to="/teacher/login" />

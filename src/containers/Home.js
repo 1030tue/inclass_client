@@ -1,5 +1,5 @@
 import React from "react";
-import TeacherContainer from "./TeacherContainer"
+// import TeacherContainer from "./TeacherContainer"
 
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -23,6 +23,8 @@ class Home extends React.Component {
     return(!!this.props.currentTeacher ? `Welcome, ${this.props.currentTeacher.fullname}`: "Hi! Starnager")
   }
 
+
+
   render(){
     if(!this.props.currentTeacher){
       return "hi "
@@ -31,9 +33,8 @@ class Home extends React.Component {
     return(
       <div>
       <h2>{this.renderWelcome()}</h2>
+        <Link to ="/teacher">You have {numClass} {numClass>1 ? "classes":"class"} </Link>
 
-        <Link to ="/teacher">You have {numClass} {numClass>1 ? "classes":"class"} today </Link>
-     <TeacherContainer />
 
       </div>
     )

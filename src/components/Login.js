@@ -92,13 +92,6 @@ class Login extends React.Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     type: types.SAVE_TEACHER,
-//     payload: data.teacher
-//   }
-// }
-
 
 
 const mapStateToProps = ({ teacherReducer: { authenticatingTeacher, failedLogin, error, loggedIn } }) => ({

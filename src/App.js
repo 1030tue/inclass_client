@@ -4,10 +4,12 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 import NavBar from "./Components/NavBar";
+import NewStudentForm from "./Components/NewStudentForm";
+
 import ClassPage from "./Containers/ClassPage";
 import Home from "./Containers/Home";
 import TeacherContainer from "./Containers/TeacherContainer"
-import StudentsContainer from "./Containers/StudentsContainer"
+// import StudentsContainer from "./Containers/StudentsContainer"
 
 // import {saveTeacher} from './actions';
 
@@ -24,9 +26,9 @@ import NewPeriod from "./Components/NewPeriod"
 
 
 class App extends React.Component{
-  state={
-    periods: []
-    }
+  // state={
+  //   periods: []
+  //   }
 
   // logOut = () => {
 	// 	localStorage.removeItem("token")
@@ -42,17 +44,17 @@ class App extends React.Component{
 	// 		currentTeacher: updatedTeacher
 	// 	})
 	// }
-
-  componentDidMount(){
-        fetch("http://localhost:4000/api/v1/periods")
-              .then(res => res.json())
-              .then(data => {
-                this.setState({
-                  periods: data
-                })
-              });
-
-	           }
+  //
+  // componentDidMount(){
+  //       fetch("http://localhost:4000/api/v1/periods")
+  //             .then(res => res.json())
+  //             .then(data => {
+  //               this.setState({
+  //                 periods: data
+  //               })
+  //             });
+  //
+	//            }
 
   // componentDidMount() {
   //     fetch("http://localhost:4000/api/v1/periods")
@@ -63,26 +65,6 @@ class App extends React.Component{
   //         })
   //       })
   //   }
-
-  // AddNewStudent=(input)=>{
-  //   fetch(`http://localhost:4000/api/v1/students`, {
-  //       method: 'POST',
-  //       headers: {"Content-Type": "application/json"},
-  //       body: JSON.stringify({
-  //         firstname: input.firstname,
-  //         lastname: input.lastname,
-  //         email: input.email,
-  //         age: input.age,
-  //         grade: input.grade,
-  //         gender: input.gender,
-  //         guardians_name: input.guardians_name,
-  //         relationship_to_student: input.relationship_to_student,
-  //         guardians_email: input.guardians_email,
-  //         guardians_phone: input.guardians_phone,
-  //       })
-  //     })
-  // }
-
 
 
 
@@ -99,7 +81,7 @@ class App extends React.Component{
            <Route exact path='/teacher/new' component={Signup} />
            <Route exact path='/teacher/login' component={Login} />
            <Route exact path='/class/new' component={NewPeriod} />
-           <Route exact path='/teacher/class' component={StudentsContainer} />
+           <Route exact path='/students/new' component={NewStudentForm} />
             <Route exact path='/' component={Home} />
            </Switch>
       </div>

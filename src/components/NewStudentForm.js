@@ -1,6 +1,6 @@
 import React from "react";
-// import withAuth from '../hocs/withAuth'
-// import { connect } from "react-redux";
+import withAuth from '../hocs/withAuth'
+import { connect } from "react-redux";
 
 
 
@@ -9,11 +9,12 @@ class NewStudentForm extends React.Component{
   }
 
   AddNewStudent=(input)=>{
-    fetch(`http://localhost:4000/api/v1/students`, {
+    debugger
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          period_id: this.props.period.id,
+          period_id: this.props.currentClass.id,
           firstname: input.firstname,
           lastname: input.lastname,
           email: input.email,
@@ -23,9 +24,10 @@ class NewStudentForm extends React.Component{
           guardians_name: input.guardians_name,
           relationship_to_student: input.relationship_to_student,
           guardians_email: input.guardians_email,
-          guardians_phone: input.guardians_phone,
+          guardians_phone: input.guardians_phone
         })
       })
+
   }
 
 
@@ -43,18 +45,20 @@ class NewStudentForm extends React.Component{
 
   handleSubmit = () => {
     this.AddNewStudent(this.state)
+    
   }
 
 
 
   render(){
-    console.log(this.state);
+    console.log(this.props);
     return(
-      <form onChange={this.handleChange}>
+      <React.Fragment>
+      <form onSubmit={this.handleSubmit}>
       <h2>New Student</h2>
 
       <h3>Student Information </h3>
-
+      <div onChange={this.handleChange}>
         <div className="form-elem">
         Name:<input
               className="input"
@@ -135,23 +139,25 @@ class NewStudentForm extends React.Component{
               placeholder="phone"
             />
           </div>
-
           <br/>
-          <input type="submit" className="button" onClick={this.handleSubmit}/>
-
+          <input type="submit" className="button" />
+        </div>
         </form>
+      </React.Fragment>
     )
   }
 }
 
-// const mapStateToProps = state => {
-//   console.log("inside mapstate", state);
-//   return {
-//     currentTeacher: state.teacherReducer.teacher
-//   };
-// };
-//
-//
-// export default withAuth(connect(mapStateToProps)(NewStudentForm));
+const mapStateToProps = state => {
+  console.log("inside mapstate", state.bathroomReducer);
+  return {
+    currentTeacher: state.teacherReducer.teacher,
+    currentClass: state.bathroomReducer.curr_class
+  };
+};
 
-export default NewStudentForm;
+
+export default withAuth(connect(mapStateToProps)(NewStudentForm));
+
+
+// export default NewStudentForm;
