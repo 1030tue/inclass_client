@@ -1,7 +1,8 @@
 const initialState={
   curr_class: null,
   brStudents: [],
-  timer:null
+  timer:null,
+  alltrips: null
 }
 
 
@@ -22,6 +23,13 @@ export default function bathroomReducer(state=initialState, action){
               updatedState.curr_class.students = updatedClass
               console.log("state", updatedState)
               return updatedState
+          case 'DELETE_STUDENT':
+          return {
+            ...state,
+            curr_class: {
+              ...state.curr_class, students: state.curr_class.students.filter(s => s.id !== action.payload.id)
+            }
+          }
           case 'BR_STUDENTS':
               return {...state, brStudents: [...state.brStudents, action.payload] };
           case 'REMOVE_STUDENT_FROM_BR':
@@ -30,9 +38,11 @@ export default function bathroomReducer(state=initialState, action){
             }))
             let newStudents = [...state.brStudents.slice(0, index), ...state.brStudents.slice(index + 1)]
               return {...state, brStudents: newStudents};
-        
+
           case 'TIMER':
               return {...state, timer: action.payload}
+          case 'ALL_TRIPS':
+              return {...state, alltrips: action.payload}
           default:
               return state;
         }

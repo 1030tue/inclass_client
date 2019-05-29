@@ -2,17 +2,28 @@ import React from "react";
 
 import StudentCard from "../Components/StudentCard"
 import BathroomPage from "./BathroomPage"
+import Second from "../Components/Second"
+import Sort from "../Components/Sort"
 
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { brStudents, updateClass } from '../actions/bathroom';
+import { brStudents, updateClass, alltrips } from '../actions/bathroom';
 
 import withAuth from '../hocs/withAuth'
 
 
 class StudentsContainer extends React.Component {
+  state={
+    searchInput:'',
+    sortFirst:'',
+    sortSecond:''
+  }
 
-
+  componentDidMount(){
+    if(!this.props.currentClass){
+      this.props.history.push('/teacher')
+    }
+  }
 
   newStudntbtn = () =>{
     return (
@@ -23,10 +34,11 @@ class StudentsContainer extends React.Component {
   }
 
 
-
   handleCardClick=(props, e)=>{
+    if(!this.props.timer){
+      alert("Start the timer first ")
+    }else{
     return(
-    
       fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/${props.id}`,
       {
       method: 'PATCH',
@@ -44,35 +56,110 @@ class StudentsContainer extends React.Component {
     .then((data)=> {
       this.props.brStudents(data)
       this.props.updateClass(data)
-
     })
-    )
+  )
+}
+  }
+
+  getAlltrips=()=>{
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/trips`)
+  }
+
+  handleSearch=(e)=>{
+    this.setState({
+      searchInput: e
+    })
+  }
+
+  handleSortFirst=(e)=>{
+    this.setState({
+      sortFirst: e
+    })
+  }
+
+  handleSortSecond=(e)=>{
+    this.setState({
+      sortSecond: e
+    })
   }
 
 
+  sortByFirstname=()=>{
+    return [...this.props.currentClass.students].sort((a,b)=>{
+      return a.firstname.localeCompare(b.firstname);
+    })
+  }
+
+  sortByLastname=()=>{
+    return this.props.currentClass.students.sort((a,b)=>{
+      return a.lastname.localeCompare(b.lastname);
+    })
+  }
 
 
+  renderSearch=()=>{
+      if(!this.state.searchInput){return this.renderSort()
+      }else{
+        return this.renderSort().filter(s=>s.firstname.toLowerCase().includes(this.state.searchInput.toLowerCase())||s.lastname.toLowerCase().includes(this.state.searchInput.toLowerCase()))
+      }
+  }
+
+  renderSort=()=>{
+    if(this.state.sortFirst==="firstname"&&this.state.sortSecond==="atoz"){
+      return this.sortByFirstname()
+    }else if(this.state.sortFirst==="lastname"&&this.state.sortSecond==="atoz"){
+      return this.sortByLastname()
+    }else if(this.state.sortFirst==="lastname"&&this.state.sortSecond==="ztoa"){
+      return [...this.props.currentClass.students].sort((b,a)=>{
+        return a.lastname.localeCompare(b.lastname);
+      })
+    }else if(this.state.sortFirst==="firstname"&&this.state.sortSecond==="ztoa"){
+      return [...this.props.currentClass.students].sort((b,a)=>{
+        return a.firstname.localeCompare(b.firstname);
+      })
+    }else{
+      return this.props.currentClass.students
+    }
+  }
 
   renderStudent=()=>{
-      return this.props.currentClass.students.map(s => <StudentCard student={s} key ={s.id} handleClick={this.handleCardClick}/>)
-
+      return this.renderSearch().map(s => <StudentCard student={s} key ={s.id} handleClick={this.handleCardClick}/>)
   }
 
+  renderPeriod=()=>{
+    let num = this.props.currentClass.period_num;
+    switch (num) {
+      case 1: return `${num}st`
+
+      case 2: return `${num}nd`
+
+      case 3: return `${num}rd`
+
+      default: return `${num}th`
+    }
+  }
+
+
   render(){
-    console.log("hello", this.props.state)
+    console.log("hello", this.props)
     return(
     <React.Fragment>
-    {!!this.props.currentClass ? `:${this.props.currentClass.period_num} period` : null}
-     {'   '}
-    {!!this.props.currentClass ? this.props.currentClass.classname : null}
-    {/*<Countdown date={Date.now() + 3600000} /> minutes Left*/}
+    { this.props.currentClass ?
+    <React.Fragment>
+    <div className="StudentsContainerHeader">
+    <h3>{!!this.props.currentClass ? `${this.renderPeriod()} period` : null}
+     {' - '}
+    {!!this.props.currentClass ? this.props.currentClass.classname : null}</h3>
+    </div>
+    <div className='tools'>
+    <Second />
+    <Sort handleSearch={this.handleSearch} handleSortFirst={this.handleSortFirst} handleSortSecond={this.handleSortSecond}/>
+    {this.newStudntbtn()}
+    </div>
     <div className="Cards-Container">
-
     {this.renderStudent()}
     </div>
-    {/*!this.state.clickedbtn ? this.newStudntbtn():null */}
-    {this.newStudntbtn()}
-    <BathroomPage />
+    {this.props.timer?  <BathroomPage /> : null} </React.Fragment> : null }
     </React.Fragment>
     )
   }
@@ -81,12 +168,10 @@ class StudentsContainer extends React.Component {
 const mapStateToProps = state => {
   return {
     currentClass: state.bathroomReducer.curr_class,
+    timer: state.bathroomReducer.timer,
     state: state
   };
 };
 
 
-export default withAuth(connect(mapStateToProps,{ brStudents, updateClass })(StudentsContainer));
-
-
-// export default StudentsContainer;
+export default withAuth(connect(mapStateToProps,{ brStudents, updateClass })(withRouter(StudentsContainer)));

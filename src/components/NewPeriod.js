@@ -1,6 +1,8 @@
 import React from "react";
 import withAuth from '../hocs/withAuth'
 import { connect } from "react-redux";
+// import { Link } from 'react-router-dom'
+import {withRouter} from 'react-router'
 
 
 class NewPeriod extends React.Component{
@@ -9,8 +11,19 @@ class NewPeriod extends React.Component{
   }
 
   capitalize = (s) => {
-   if (typeof s !== 'string') return ''
-   return s.charAt(0).toUpperCase() + s.slice(1)
+   if (typeof s !== 'string'){ return ''}
+   else{
+     let splitStr = s.split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' '); }
+  }
+
+
+  capitalize = (s) => {
+   if (typeof s !== 'string'){ return ''}
+   else{return s.charAt(0).toUpperCase() + s.slice(1)}
  }
 
   handleChange = (e) => {
@@ -20,7 +33,8 @@ class NewPeriod extends React.Component{
 
   }
 
-  handleSubmit=()=>{
+  handleSubmit=(e)=>{
+    e.preventDefault()
     this.addNewPeriod(this.state)
   }
 
@@ -34,17 +48,21 @@ class NewPeriod extends React.Component{
       },
       body: JSON.stringify({
         teacher_id: !!this.props.currentTeacher? this.props.currentTeacher.id : null,
-        classname: input.classname,
+        classname: this.capitalize(input.classname),
         duration: input.duration,
         date: input.date,
         period_num: input.period_num
       })
     })
+    .then(res=>res.json())
+    .then(data => {this.props.history.push('/teacher')
+                    window.location.reload();})
   }
 
 
   render(){
-    console.log("ADDINGNewPeriod", this.state);
+    // console.log("ADDINGNewPeriod", this.props);
+    console.log(this.props)
     return(
       <form onChange={this.handleChange}>
       <h3>Add New Class</h3>
@@ -99,6 +117,6 @@ const mapStateToProps = state => {
 };
 
 
-export default withAuth(connect(mapStateToProps)(NewPeriod));
+export default withAuth(connect(mapStateToProps)(withRouter(NewPeriod)));
 
 // export default NewPeriod;

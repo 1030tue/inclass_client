@@ -106,13 +106,10 @@ class Signup extends React.Component {
 
 
 const mapStateToProps = state => {
-  // state gives me access to the initialState
-  // connect gives me an access to dispatch function.
-  // If I don't need any state, I don't need mapStateToProps.
   console.log("state from REDUX", state);
-  return {
-    name: "Kate"
-  };
+  // return {
+  //   name: "Kate"
+  // };
 };
 
 export default withRouter(connect(mapStateToProps)(Signup));

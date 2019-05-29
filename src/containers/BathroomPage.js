@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
 
 import { removeBrStudent, updateClass } from '../actions/bathroom'
@@ -18,7 +18,7 @@ class BathroomPage extends React.Component {
 
   cancelTimer=(id)=> {
       this.props.removeBrStudent(id);
-      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/${id}`,
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/updateTimer/${id}`,
       {
       method: 'PATCH',
       headers: {
@@ -32,14 +32,28 @@ class BathroomPage extends React.Component {
     .then((data)=> {
       this.props.updateClass(data)
     })
+
+  }
+
+  statusBar=()=>{
+    if(!this.props.brStudents.length){
+      return "You Are In Class"
+    }else{
+      if(this.props.brStudents.length>1){
+        return(`${this.props.brStudents.length} students are out.`)
+      }else{
+        return(`${this.props.brStudents.length} student is out.`)
+      }
+    }
   }
 
   render(){
-    console.log("bath2", this.props.brStudents);
+    // console.log("bath2", this.props.brStudents);
     return(
       <React.Fragment>
-      <div className="brPage" style={{backgroundColor:"lightblue"}}>
-        {this.renderStudent()}
+      <div className="brPage" style={{backgroundColor:"#d1dfde", float:"right"}}>
+        <h3>{this.statusBar()}</h3>
+        <div>{this.renderStudent()}</div>
       </div>
       </React.Fragment>
       )

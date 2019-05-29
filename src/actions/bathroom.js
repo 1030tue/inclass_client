@@ -33,20 +33,34 @@ export const brStudents = (student) => ({
   payload: student
 })
 
-// export const timer = (time) => ({
-//   type: 'TIMER',
-//   payload: time
-// })
+export const timer = (time) => ({
+  type: 'TIMER',
+  payload: time
+})
+
+export const cardTimer = (time) => ({
+  type: 'CARD_TIMER',
+  payload: time
+})
 
 export const removeBrStudent = (studentId) => ({
   type: 'REMOVE_STUDENT_FROM_BR',
   payload: studentId
 })
 
-
+export const alltrips=(trips)=>({
+  type: 'ALL_TRIPS',
+  payload: trips
+})
 
 
 export const btnDisabled = (clicked) =>({
   type: 'BTN_DISABLED',
   payload: clicked
+})
+
+
+export const deleteStudent = (student)=>({
+  type: "DELETE_STUDENT",
+  payload: student
 })

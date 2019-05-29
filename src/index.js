@@ -15,6 +15,9 @@ import { Provider } from 'react-redux';
 
 import * as serviceWorker from './serviceWorker';
 
+import 'semantic-ui-css/semantic.min.css'
+
+
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
 

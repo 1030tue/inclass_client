@@ -1,51 +1,55 @@
 import React from "react";
 import withAuth from '../hocs/withAuth'
 import { connect } from "react-redux";
-
+import {withRouter} from 'react-router-dom'
 
 
 class NewStudentForm extends React.Component{
   state={
   }
 
+  capitalize = (s) => {
+   if (typeof s !== 'string'){ return ''}
+   else{
+     let splitStr = s.split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' '); }
+ }
+
   AddNewStudent=(input)=>{
-    debugger
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students`, {
         method: 'POST',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
           period_id: this.props.currentClass.id,
-          firstname: input.firstname,
-          lastname: input.lastname,
+          firstname: this.capitalize(input.firstname),
+          lastname: this.capitalize(input.lastname),
           email: input.email,
           age: input.age,
           grade: input.grade,
           gender: input.gender,
-          guardians_name: input.guardians_name,
+          guardians_name: this.capitalize(input.guardians_name),
           relationship_to_student: input.relationship_to_student,
           guardians_email: input.guardians_email,
           guardians_phone: input.guardians_phone
         })
-      })
-
+      }).then(res=>res.json())
+      .then(data=>this.props.history.push("/class"))
   }
 
 
-  capitalize = (s) => {
-   if (typeof s !== 'string') return ''
-   return s.charAt(0).toUpperCase() + s.slice(1)
- }
-
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: this.capitalize(e.target.value)
+      [e.target.name]: e.target.value
     })
 
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault()
     this.AddNewStudent(this.state)
-    
   }
 
 
@@ -157,7 +161,7 @@ const mapStateToProps = state => {
 };
 
 
-export default withAuth(connect(mapStateToProps)(NewStudentForm));
+export default withAuth(connect(mapStateToProps)(withRouter(NewStudentForm)));
 
 
 // export default NewStudentForm;
