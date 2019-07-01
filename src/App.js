@@ -1,64 +1,59 @@
 import React from 'react';
-// import logo from './logo.svg';
-// import { connect } from "react-redux";
-import { Route, Switch, Redirect } from 'react-router-dom'
+
+import { connect } from "react-redux";
+import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 import NavBar from "./Components/NavBar";
+import NewStudentForm from "./Components/NewStudentForm";
+
 import ClassPage from "./Containers/ClassPage";
-// import { GET_PERIODS } from "./Types";
+import Home from "./Containers/Home";
+import TeacherContainer from "./Containers/TeacherContainer"
+import StudentsContainer from "./Containers/StudentsContainer"
+
+// import StudentsContainer from "./Containers/StudentsContainer"
+
+// import {saveTeacher} from './actions';
+import Signup from "./Components/Signup"
+import Login from "./Components/Login"
+import NewPeriod from "./Components/NewPeriod"
+
+
+// <Route exact path='/class' render={() => <ClassPage
+// periods={this.state.periods}/>} />
+
 
 class App extends React.Component{
-  state={
-    periods: []
-  }
-
-  componentDidMount() {
-      fetch("http://localhost:4000/api/v1/periods")
-        .then(res => res.json())
-        .then(data => {
-          this.setState({
-            periods: data
-          })
-        })
-    }
-
-  AddNewStudent=(input)=>{
-    fetch(`http://localhost:4000/api/v1/students`, {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-          firstname: input.firstname,
-          lastname: input.lastname,
-          email: input.email,
-          age: input.age,
-          grade: input.grade,
-          gender: input.gender,
-          guardians_name: input.guardians_name,
-          relationship_to_student: input.relationship_to_student,
-          guardians_email: input.guardians_email,
-          guardians_phone: input.guardians_phone,
-        })
-      })
-  }
-
   render(){
+    console.log('%c APP Props: ', 'color: firebrick', this.props)
     return(
-      <div className="App">
-      <NavBar />
-        <ClassPage
-        AddNewStudent={this.AddNewStudent}
-        periods={this.state.periods} />
+      <div>
+        <NavBar />
+          <Switch>
+           <Route exact path='/teacher' component={TeacherContainer} setCurrentTeacher={this.setCurrentTeacher}/>
+
+           <Route exact path='/teacher/new' component={Signup} />
+           <Route exact path='/teacher/login' component={Login} />
+           <Route path='/class/new' render={(routeProps) => <NewPeriod {...routeProps} />} />
+           <Route exact path='/students/new' component={NewStudentForm} />
+           <Route exact path='/' component={Home} />
+
+           <Route path="/class" component={StudentsContainer}/>
+           </Switch>
+
       </div>
     )
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     periods: state.periods
-//   };
-// };
-//
-// export default connect(mapStateToProps)(App);
 
-export default App;
+const mapStateToProps = state => {
+  console.log(state.teacherReducer);
+  return {
+    currentTeacher:state.teacherReducer.teacher,
+    currentClass: state.bathroomReducer.curr_class,
+    state:state
+  };
+};
+
+export default withRouter(connect()(App))

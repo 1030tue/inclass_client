@@ -1,4 +1,7 @@
 import React from "react";
+import withAuth from '../hocs/withAuth'
+import { connect } from "react-redux";
+import {withRouter} from 'react-router-dom'
 
 
 class NewStudentForm extends React.Component{
@@ -6,31 +9,60 @@ class NewStudentForm extends React.Component{
   }
 
   capitalize = (s) => {
-   if (typeof s !== 'string') return ''
-   return s.charAt(0).toUpperCase() + s.slice(1)
+   if (typeof s !== 'string'){ return ''}
+   else{
+     let splitStr = s.split(' ');
+    for (let i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' '); }
  }
+
+  AddNewStudent=(input)=>{
+    fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students`, {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          period_id: this.props.currentClass.id,
+          firstname: this.capitalize(input.firstname),
+          lastname: this.capitalize(input.lastname),
+          email: input.email,
+          age: input.age,
+          grade: input.grade,
+          gender: input.gender,
+          guardians_name: this.capitalize(input.guardians_name),
+          relationship_to_student: input.relationship_to_student,
+          guardians_email: input.guardians_email,
+          guardians_phone: input.guardians_phone
+        })
+      }).then(res=>res.json())
+      .then(data=>this.props.history.push("/class"))
+  }
+
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: this.capitalize(e.target.value)
+      [e.target.name]: e.target.value
     })
 
   }
 
-  handleSubmit = () => {
-    this.props.AddNewStudent(this.state)
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.AddNewStudent(this.state)
   }
 
 
 
   render(){
-    console.log(this.state);
+    console.log(this.props);
     return(
-      <form onChange={this.handleChange}>
+      <React.Fragment>
+      <form onSubmit={this.handleSubmit}>
       <h2>New Student</h2>
 
       <h3>Student Information </h3>
-
+      <div onChange={this.handleChange}>
         <div className="form-elem">
         Name:<input
               className="input"
@@ -111,22 +143,25 @@ class NewStudentForm extends React.Component{
               placeholder="phone"
             />
           </div>
-
           <br/>
-          <input type="submit" className="StudentCard" onClick={this.handleSubmit}/>
-
+          <input type="submit" className="button" />
+        </div>
         </form>
+      </React.Fragment>
     )
   }
 }
 
-export default NewStudentForm;
+const mapStateToProps = state => {
+  console.log("inside mapstate", state.bathroomReducer);
+  return {
+    currentTeacher: state.teacherReducer.teacher,
+    currentClass: state.bathroomReducer.curr_class
+  };
+};
 
-// <h3>Add Class to Student </h3>
-// <div className="form-elem">
-// <input
-//     className="input"
-//     type="dropdown"
-//     name="periods"
-// />
-// </div>
+
+export default withAuth(connect(mapStateToProps)(withRouter(NewStudentForm)));
+
+
+// export default NewStudentForm;
