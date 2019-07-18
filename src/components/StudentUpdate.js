@@ -26,9 +26,9 @@ class StudentUpdate extends React.Component {
   }
 
   handleSubmit = () => {
-
     this.studentUpdate(this.state)
   }
+
 
  studentUpdate=(input)=>{
   fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/${this.props.student.id}`,
@@ -54,6 +54,7 @@ class StudentUpdate extends React.Component {
     this.props.updateClass(data)
   })
   }
+
 
   studentDelete=()=>{
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/${this.props.student.id}`,

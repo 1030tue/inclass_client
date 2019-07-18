@@ -40,7 +40,6 @@ class StudentSpec extends React.Component {
 
 
   render(){
-    // console.log(this.props.student.id);
     return(
       <React.Fragment>
         <div className="popup">

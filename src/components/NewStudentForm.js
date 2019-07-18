@@ -2,6 +2,8 @@ import React from "react";
 import withAuth from '../hocs/withAuth'
 import { connect } from "react-redux";
 import {withRouter} from 'react-router-dom'
+import { addStudent } from "../actions/bathroom"
+
 
 
 class NewStudentForm extends React.Component{
@@ -36,7 +38,10 @@ class NewStudentForm extends React.Component{
           guardians_phone: input.guardians_phone
         })
       }).then(res=>res.json())
-      .then(data=>this.props.history.push("/class"))
+      .then(data=>{
+                  this.props.addStudent(data)
+                  this.props.history.push("/class")
+                  })
   }
 
 
@@ -57,7 +62,7 @@ class NewStudentForm extends React.Component{
   render(){
     console.log(this.props);
     return(
-      <React.Fragment>
+      <div className="NewStudentForm">
       <form onSubmit={this.handleSubmit}>
       <h2>New Student</h2>
 
@@ -79,7 +84,7 @@ class NewStudentForm extends React.Component{
             <div className="form-elem">
           Email:  <input
               className="input"
-              type="text"
+              type="email"
               name="email"
               placeholder="email"
             />
@@ -104,6 +109,7 @@ class NewStudentForm extends React.Component{
               <input name="gender" type="radio" value="female"/>
               female
             </div>
+            &nbsp; &nbsp;
             <div>
               <input name="gender" type="radio" value="male"/>
               male
@@ -130,7 +136,7 @@ class NewStudentForm extends React.Component{
           <div className="form-elem">
           Email:  <input
               className="input"
-              type="text"
+              type="email"
               name="guardians_email"
               placeholder="email"
             />
@@ -138,16 +144,17 @@ class NewStudentForm extends React.Component{
           <div className="form-elem">
           Phone:  <input
               className="input"
-              type="text"
+              type="phone"
               name="guardians_phone"
               placeholder="phone"
             />
           </div>
           <br/>
-          <input type="submit" className="button" />
+          <input type="submit" className="button" style={{width: "36.5em", marginLeft: "13em", marginBottom: "10em", padding:".8em"}}/>
+          <br/>
         </div>
         </form>
-      </React.Fragment>
+      </div>
     )
   }
 }
@@ -156,12 +163,13 @@ const mapStateToProps = state => {
   console.log("inside mapstate", state.bathroomReducer);
   return {
     currentTeacher: state.teacherReducer.teacher,
-    currentClass: state.bathroomReducer.curr_class
+    currentClass: state.bathroomReducer.curr_class,
+    state:state
   };
 };
 
 
-export default withAuth(connect(mapStateToProps)(withRouter(NewStudentForm)));
+export default withAuth(connect(mapStateToProps,{addStudent})(withRouter(NewStudentForm)));
 
 
 // export default NewStudentForm;

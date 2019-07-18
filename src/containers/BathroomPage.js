@@ -48,7 +48,6 @@ class BathroomPage extends React.Component {
   }
 
   render(){
-    // console.log("bath2", this.props.brStudents);
     return(
       <React.Fragment>
       <div className="brPage" style={{backgroundColor:"#d1dfde", float:"right"}}>

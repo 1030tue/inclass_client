@@ -5,7 +5,7 @@ import Report from "./Report"
 
 import { connect } from "react-redux";
 import { timer } from '../actions/bathroom';
-import { Modal } from 'semantic-ui-react'
+// import { Modal } from 'semantic-ui-react'
 
 
 class Second extends React.Component{
@@ -65,7 +65,7 @@ confirmAlert({
 
 handleRealClick(){
   this.handleClick();
-  this.setState({min: this.state.min-1, running: !this.state.running});
+  this.setState({min: this.state.min - 1, running: !this.state.running});
 }
 
 
@@ -97,7 +97,7 @@ handleClick(){
 }
 
 initialisate(){
-  let num = Math.floor(this.props.currentClass.duration)-1
+  let num = Math.floor(this.props.currentClass.duration)
   this.setState({sec: '00', min: num, running: false});
 }
 
@@ -120,14 +120,13 @@ render(){
       <br/>
       <div className="clock">
       {this.renderTime()}
-      </div>
       <br/>
-
       {!this.state.running ? <button onClick={this.confirm}>Start</button> : <button onClick={()=>{
         clearInterval(this.timer);
         this.setState({running: false});}}>Pause</button>}
      <button onClick={()=>this.initialisate()}>Reset</button>
-    <button onClick={this.confirmEnd.bind()}>End</button>
+     <button onClick={this.confirmEnd.bind()}>End</button>
+      </div>
  <br/> <br/> <br/>
      </div>
 

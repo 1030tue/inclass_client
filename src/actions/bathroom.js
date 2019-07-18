@@ -64,3 +64,9 @@ export const deleteStudent = (student)=>({
   type: "DELETE_STUDENT",
   payload: student
 })
+
+
+export const addStudent = (student)=>({
+  type: "ADD_STUDENT",
+  payload: student
+})

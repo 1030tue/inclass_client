@@ -24,12 +24,14 @@ export default function bathroomReducer(state=initialState, action){
               console.log("state", updatedState)
               return updatedState
           case 'DELETE_STUDENT':
-          return {
-            ...state,
-            curr_class: {
-              ...state.curr_class, students: state.curr_class.students.filter(s => s.id !== action.payload.id)
-            }
-          }
+              return {
+                ...state,
+                curr_class: {
+                  ...state.curr_class, students: state.curr_class.students.filter(s => s.id !== action.payload.id)
+                }
+              }
+          case 'ADD_STUDENT':
+              return{...state, curr_class:{ ...state.curr_class, students: [...state.curr_class.students, action.payload]}};
           case 'BR_STUDENTS':
               return {...state, brStudents: [...state.brStudents, action.payload] };
           case 'REMOVE_STUDENT_FROM_BR':

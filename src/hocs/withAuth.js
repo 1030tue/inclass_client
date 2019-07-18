@@ -20,6 +20,14 @@ const withAuth =  (WrappedComponent) => {
     //   }
     //   return repeatedString;
     // }
+    loading=()=>{
+      return(
+        <div className="App-logo-div">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2 style={{paddingLeft:"5em"}}> &nbsp;&nbsp;&nbsp; Loading...</h2>
+        </div>
+      )
+    }
 
     render() {
       console.log('%c INSIDE RENDER FOR HOC', 'color: green')
@@ -27,7 +35,8 @@ const withAuth =  (WrappedComponent) => {
         return <WrappedComponent />
       } else if (localStorage.getItem('jwt') && (this.props.authenticatingTeacher || !this.props.loggedIn)) {
         return (
-            <img src={logo} className="App-logo" alt="logo" />)
+          this.loading()
+          )
       } else {
         return <Redirect to="/teacher/login" />
       }

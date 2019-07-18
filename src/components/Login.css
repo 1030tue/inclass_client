@@ -5,15 +5,21 @@
   -moz-box-sizing:border-box;
   -webkit-box-sizing:border-box;
   font-family:arial;
-
 }
+
+
+
 /* body{background:#EEF18D;} */
 .login-form h1{
-  color:#ccc;
+  /* color:#ccc; */
   text-align:center;
   font-family: 'Rock Salt', cursive;
   font-size: 50px;
+  font-weight: bold;
+  fill: url("/img/bg.jpg");
+
 }
+
 
 .Signup-form h1{
   color:#ccc;
@@ -21,6 +27,7 @@
   font-family: 'Rock Salt', cursive;
   font-size: 50px;
 }
+
 
 
 .signup-form{

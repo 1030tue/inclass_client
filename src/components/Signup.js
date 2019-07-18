@@ -5,8 +5,7 @@ import { connect } from "react-redux";
 import { SAVE_TEACHER } from "../actions/ActionTypes";
 
 import './Login.css';
-
-const url = "http://localhost:4000/api/v1"
+import Background from '../img/bg.jpg';
 
 class Signup extends React.Component {
 
@@ -37,7 +36,7 @@ class Signup extends React.Component {
     e.preventDefault()
     const {signup} = this.state
     if (signup.signupPassword === signup.signupConfirmPassword) {
-      fetch(`${url}/signup`, {
+      fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/teachers`, {
         method: 'POST',
         body: JSON.stringify(signup),
         headers:{'Content-Type': 'application/json'}
@@ -65,8 +64,13 @@ class Signup extends React.Component {
 
 
   render(){
-    console.log(this.state);
+    let sectionStyle = {
+      width: "100%",
+      height: "900px",
+      backgroundImage: `url(${Background})`
+    };
     return(
+       <section style={ sectionStyle }>
       <div className="signup-form">
         <form onChange={this.handleSignupChange}>
             <div className="Signup-form">
@@ -100,6 +104,7 @@ class Signup extends React.Component {
             </div>
         </form>
       </div>
+      </section>
     )
   }
 }

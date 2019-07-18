@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import withAuth from '../hocs/withAuth'
 // import StudentsContainer from "./StudentsContainer"
-
+import Report from '../Components/Report'
 
 class Home extends React.Component {
   state={
@@ -31,10 +31,10 @@ class Home extends React.Component {
     }else{
       const numClass = this.props.currentTeacher.periods.length
     return(
-      <div>
+      <div className="home">
       <h2>{this.renderWelcome()}</h2>
-        <Link to ="/teacher">You have {numClass} {numClass>1 ? "classes":"class"} </Link>
-
+        <h3><Link to ="/teacher">You have {numClass} {numClass>1 ? "classes":"class"} </Link></h3>
+        {this.props.currentClass? <Report/>:null}
 
       </div>
     )
@@ -44,7 +44,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentTeacher: state.teacherReducer.teacher
+    currentTeacher: state.teacherReducer.teacher,
+    currentClass: state.bathroomReducer.curr_class
   };
 };
 
