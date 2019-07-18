@@ -1,8 +1,7 @@
 import React from "react";
-
 import { connect } from "react-redux";
-
 import Popup from "reactjs-popup";
+import SMSForm from './SMSForm';
 
 // import { btnDisabled } from '../actions/bathroom';
 // import { Button } from 'semantic-ui-react'
@@ -23,9 +22,9 @@ class TripCard extends React.Component {
   }
 
   //Pause
-    handleClick=()=>{
-      clearInterval(this.state.minuteCounter)
-      clearInterval(this.state.secondCounter)
+  handleClick=()=>{
+    clearInterval(this.state.minuteCounter)
+    clearInterval(this.state.secondCounter)
   }
 
 
@@ -82,35 +81,10 @@ class TripCard extends React.Component {
     e.preventDefault()
   }
 
-  msgForm=()=>{
-    return (<form
-      className={this.state.error ? 'error sms-form' : 'sms-form'}
-    >
-    <div>
-      <label htmlFor="to">To:</label>
-      <input
-         type="tel"
-         name="to"
-         id="to"
-      />
-    </div>
-    <div>
-      <label htmlFor="body">Body:</label>
-      <textarea name="body" id="body"/>
-    </div>
-    <button onClick={this.handleClick} type="submit">
-      Send message
-    </button>
-  </form>)
-  }
 
 
   renderStudent=(student)=>{
       let destination = this.props.student.trips[this.props.student.trips.length-1].destination
-      // let btnStyle={
-      //   backgroundColor: 'transparent',
-      //   borderColor: 'transparent'
-      // }
 
       let tripCardstyle;
           switch (destination) {
@@ -135,11 +109,14 @@ class TripCard extends React.Component {
           </h5>
              <button data-id={this.props.student.id} onClick={(e) => {
               this.props.cancelTimer(parseInt(e.target.dataset.id))} }>BACK</button>
-              <button>✉️</button>
-              <Popup trigger={<span>  {destination==="Emergency"? <button>🚩ASK HELP</button>:null}</span>} position="bottom">
-              {this.msgForm()}
+
+              <Popup trigger={<span><button>TEXT</button></span>} position="bottom">
+              <SMSForm/>
               </Popup>
 
+              <Popup trigger={<span>  {destination==="Emergency"? <button>🚩ASK HELP</button>:null}</span>} position="bottom">
+              <SMSForm/>
+              </Popup>
         </div>
       )
   }

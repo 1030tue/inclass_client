@@ -21,11 +21,6 @@ class NewPeriod extends React.Component{
   }
 
 
-  capitalize = (s) => {
-   if (typeof s !== 'string'){ return ''}
-   else{return s.charAt(0).toUpperCase() + s.slice(1)}
- }
-
   handleChange = (e) => {
     this.setState({
       [e.target.name]: this.capitalize(e.target.value)
@@ -61,22 +56,22 @@ class NewPeriod extends React.Component{
 
 
   render(){
-    // console.log("ADDINGNewPeriod", this.props);
     console.log(this.props)
     return(
+      <div className={NewPeriod} style={{paddingLeft: '3em', paddingTop: '3em'}}>
       <form onChange={this.handleChange}>
-      <h3>Add New Class</h3>
+      <h3 style={{marginLeft:"6em"}}>Add New Class</h3>
 
         <div className="form-elem">
-        Class name: <input
-              className="input"
-              type="text"
-              name="classname"
-              placeholder="Class name"
-              required/>
+        Class Name   : &nbsp; <input
+                    className="input"
+                    type="text"
+                    name="classname"
+                    placeholder="Class name"
+                    required/>
         </div>
         <div className="form-elem">
-        Date: <input
+        Date  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; : &nbsp;<input
                 className="input"
                 type="date"
                 name="date"
@@ -85,7 +80,7 @@ class NewPeriod extends React.Component{
               />
             </div>
             <div className="form-elem">
-                Class Period:  <input
+        Class Period:   &nbsp;<input
                           className="input"
                           type="number"
                           name="period_num"
@@ -94,7 +89,7 @@ class NewPeriod extends React.Component{
                           />
             </div>
             <div className="form-elem">
-                Duration:  <input
+        Duration &nbsp; &nbsp;  &nbsp; :  &nbsp; <input
                       className="input"
                       type="number"
                       name="duration"
@@ -103,8 +98,9 @@ class NewPeriod extends React.Component{
                     />
             </div>
           <br/>
-          <input type="submit" onClick={this.handleSubmit}/>
+          <input className="button" style={{width: "44em", marginLeft:"18em", padding:".5em"}}type="submit" onClick={this.handleSubmit}/>
         </form>
+      </div>
     )
   }
 }

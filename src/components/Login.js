@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { loginTeacher } from '../actions/teacher'
 
 import './Login.css';
+import Background from '../img/bg.jpg';
+
 
 class Login extends React.Component {
 
@@ -29,40 +31,21 @@ class Login extends React.Component {
   this.setState({ email: '', password: '' }) //reset form to initial state
 }
 
-  // login = (e) => {
-  //   e.preventDefault()
-  //   fetch(`${url}/login`, {
-  //     method: 'POST',
-  //     body: JSON.stringify({teacher:{...this.state.login}}),
-  //     headers:{
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   .then(res => res.json())
-  //   .then(
-  //     (data) => {
-  //       console.log(data.teacher);
-  //     if (data.message){
-  //       alert(data.message);
-  //       this.setState({ email: "", password: "" });
-  //       this.props.history.push("/teacher/login");
-  //     } else {
-  //       this.props.saveTeacher(data.teacher);
-  //       localStorage.setItem("teacher_token", data.jwt);
-  //       this.props.history.push("/teacher");
-  //         }
-  //   }
-  // )
-  // }
-
 
   render(){
-    console.log('%c LOGIN FORM PROPS: ', 'color: red', this.state)
+    let sectionStyle = {
+      width: "100%",
+      height: "700px",
+      backgroundImage: `url(${Background})`
+    };
+
+    // console.log('%c LOGIN FORM PROPS: ', 'color: red', this.state)
     return this.props.loggedIn ? (
       <Redirect to="/" />
     ) : (
-      <div className="login-form">
-              <h1>In-Class</h1>
+       <section style={ sectionStyle }>
+      <div className="login-form" >
+              <h1 style={{fontColor:"transparent"}}>In-Class</h1>
               <form onSubmit={this.handleLoginSubmit}>
                <div className="form-group ">
                  <input type="text" className="form-control" name="email"
@@ -87,7 +70,7 @@ class Login extends React.Component {
           <button className="log-btn">sign up</button>
         </Link>
         </div>
-
+        </section>
     )
   }
 }

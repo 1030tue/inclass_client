@@ -35,21 +35,10 @@ class ClassPage extends React.Component {
     {this.renderCards()}
     <br/>
 
-    <Link to = "/class/new" > <button className="StudentCard"> Create New Class </button> </Link>
-
     </div>
     )
   }
 }
-//
-// const mapStateToProps = state => {
-//   return {
-//     currentTeacher: state.teacherReducer.teacher
-//   };
-// };
-//
-//
-// export default connect(mapStateToProps)(ClassPage)
 
 
 export default ClassPage

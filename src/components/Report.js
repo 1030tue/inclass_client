@@ -27,30 +27,47 @@ findTrips=()=>{
 
 findBathroom=()=>{
   if(this.findTrips()){
-    return this.state.trips.filter(t=>t.destination==="🧻").length}else{return "No one"}
+    return this.findTrips().filter(t=>t.destination==="🧻").length}else{return "No one"}
 }
 
 findNurse=()=>{
   if(this.findTrips()){
-    return this.state.trips.filter(t=>t.destination==="💊").length}else{return "No one"}
+    return this.findTrips().filter(t=>t.destination==="💊").length}else{return "No one"}
 }
 
 findEmergency=()=>{
   if(this.findTrips()){
-    return this.state.trips.filter(t=>t.destination==="Emergency").length}else{return "No one"}
+    return this.findTrips().filter(t=>t.destination==="Emergency").length}else{return "No one"}
 }
 
 alltrips=()=>{
   if(this.findTrips()){
-    return this.state.trips.length}else{return "No one"}
+    return this.findTrips().length}else{return "No one"}
+}
+
+table=()=>{
+let myDate = new Date();
+let today = myDate.getFullYear() + "-" +0+(myDate.getMonth()+1) + "-" + myDate.getDate();
+let trips = !this.findTrips()? null: this.findTrips().filter((t=>t.created_at.split('T')[0] === today))
+return trips
+}
+
+
+renderTable=(student)=>{
+  return(
+  "  // {student.firstname} {student.lastname} {student.trips}"
+  )
 }
 
 render(){
-console.log(this.findBathroom());
+console.log(this.table());
     return(
-      <div>
+      <div className='report'>
+      <hr/>
+      <h3>You just had</h3>
       <h2> {this.props.currentClass.classname} </h2>
-      <h2> Duration: {this.props.timer? this.props.timer : 0} seconds</h2>
+
+      <h3> Duration: {this.props.timer? `${this.props.timer}sec.` : `${this.props.currentClass.duration}min.`} </h3>
       <h3>  {this.findBathroom()} went to bathroom.</h3>
       <h3>  {this.findNurse()} went to nurse.</h3>
       <h3>  {this.findEmergency()} had emargency.</h3>

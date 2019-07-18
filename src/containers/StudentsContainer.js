@@ -1,9 +1,9 @@
 import React from "react";
-
 import StudentCard from "../Components/StudentCard"
 import BathroomPage from "./BathroomPage"
 import Second from "../Components/Second"
 import Sort from "../Components/Sort"
+import Dropdown from "../Components/Dropdown"
 
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -23,6 +23,7 @@ class StudentsContainer extends React.Component {
     if(!this.props.currentClass){
       this.props.history.push('/teacher')
     }
+    this.getAlltrips()
   }
 
   newStudntbtn = () =>{
@@ -37,6 +38,8 @@ class StudentsContainer extends React.Component {
   handleCardClick=(props, e)=>{
     if(!this.props.timer){
       alert("Start the timer first ")
+    }else if(this.props.timer >= parseInt(this.props.currentClass.duration)*60 - 10*60){
+      alert("This class has 10 minutes left!")
     }else{
     return(
       fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/students/${props.id}`,
@@ -63,7 +66,10 @@ class StudentsContainer extends React.Component {
 
   getAlltrips=()=>{
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/trips`)
+    .then(res=>res.json())
+    .then(data=>this.props.alltrips(data))
   }
+
 
   handleSearch=(e)=>{
     this.setState({
@@ -123,6 +129,8 @@ class StudentsContainer extends React.Component {
   }
 
   renderStudent=()=>{
+    console.log("hey",this.props);
+    debugger
       return this.renderSearch().map(s => <StudentCard student={s} key ={s.id} handleClick={this.handleCardClick}/>)
   }
 
@@ -130,18 +138,14 @@ class StudentsContainer extends React.Component {
     let num = this.props.currentClass.period_num;
     switch (num) {
       case 1: return `${num}st`
-
       case 2: return `${num}nd`
-
       case 3: return `${num}rd`
-
       default: return `${num}th`
     }
   }
 
 
   render(){
-    console.log("hello", this.props)
     return(
     <React.Fragment>
     { this.props.currentClass ?
@@ -151,21 +155,27 @@ class StudentsContainer extends React.Component {
      {' - '}
     {!!this.props.currentClass ? this.props.currentClass.classname : null}</h3>
     </div>
-    <div className='tools'>
-    <Second />
-    <Sort handleSearch={this.handleSearch} handleSortFirst={this.handleSortFirst} handleSortSecond={this.handleSortSecond}/>
-    {this.newStudntbtn()}
-    </div>
-    <div className="Cards-Container">
-    {this.renderStudent()}
-    </div>
-    {this.props.timer?  <BathroomPage /> : null} </React.Fragment> : null }
+    <div className="StudentsContainer">
+      <div className='tools'>
+        <Second />
+        <Sort handleSearch={this.handleSearch} handleSortFirst={this.handleSortFirst} handleSortSecond={this.handleSortSecond}/>
+            <br/>
+        {this.newStudntbtn()}
+            <br/>
+        <Dropdown/>
+      </div>
+      <div className="Cards-Container">
+        {this.renderStudent()}
+      </div>
+    {this.props.timer?  <BathroomPage /> : null}   </div></React.Fragment> : null }
+
     </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = state => {
+  console.log("hello2", state)
   return {
     currentClass: state.bathroomReducer.curr_class,
     timer: state.bathroomReducer.timer,
@@ -174,4 +184,4 @@ const mapStateToProps = state => {
 };
 
 
-export default withAuth(connect(mapStateToProps,{ brStudents, updateClass })(withRouter(StudentsContainer)));
+export default withAuth(connect(mapStateToProps,{ brStudents, updateClass, alltrips })(withRouter(StudentsContainer)));

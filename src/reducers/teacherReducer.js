@@ -8,11 +8,9 @@ const defaultState = {
 
 const teacherReducer = /*FUNCTION*/ (state=defaultState, action) => {
   switch (action.type) {
-    case 'SAVE_TEACHER':
-      //action.payload { teachername: 'Chandler Bing', bio: 'my teacher bio', avatar: 'some image url' }
+    case 'SAVE_TEACHER':    
       return { ...state, teacher: action.payload, loggedIn: false, authenticatingTeacher: true }
     case 'SET_CURRENT_TEACHER':
-      //action.payload { teachername: 'Chandler Bing', bio: 'my teacher bio', avatar: 'some image url' }
       return { ...state, teacher: action.payload, loggedIn: true, authenticatingTeacher: false }
     case 'AUTHENTICATING_TEACHER': //tells the app we're fetching
       return { ...state, authenticatingTeacher: true }
