@@ -1,5 +1,5 @@
 import React from "react";
-import StudentCard from "../Components/StudentCard"
+import StudentCard from "../Components/Studentcard"
 import BathroomPage from "./BathroomPage"
 import Second from "../Components/Second"
 import Sort from "../Components/Sort"
