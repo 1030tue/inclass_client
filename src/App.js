@@ -6,7 +6,7 @@ import './App.css';
 import NavBar from "./Components/NavBar";
 import NewStudentForm from "./Components/NewStudentForm";
 
-import ClassPage from "./Containers/ClassPage";
+// import ClassPage from "./Containers/ClassPage";
 import Home from "./Containers/Home";
 import TeacherContainer from "./Containers/TeacherContainer"
 import StudentsContainer from "./Containers/StudentsContainer"
