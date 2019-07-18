@@ -2,6 +2,10 @@
   "name": "inclass-client",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "6.x",
+    "node": "11.10.0"
+  },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
     "react": "^16.8.6",
