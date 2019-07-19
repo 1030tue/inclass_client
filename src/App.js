@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
-import NavBar from "./Components/NavBar";
+import NavBar from "./Containers/NavBar";
 import NewStudentForm from "./Components/NewStudentForm";
 
 // import ClassPage from "./Containers/ClassPage";
