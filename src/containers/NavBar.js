@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 class NavBar extends React.Component {
   logOut = () => {
 		localStorage.removeItem("jwt")}
-
+    
     todayDate = ()=>{
       let newDate = new Date()
       let month = newDate.getMonth();
