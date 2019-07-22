@@ -119,25 +119,29 @@ title h4:link{
 
 
 .periodCard{
+  display: flex;
   margin: auto;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
   width: 30em;
   height: 3.5em;
   padding: 10px;
   border: 3px solid gray;
   box-shadow: 2px 2px 10px #666;
-  /* animation: shine 2500ms linear infinite; */
 }
-/* @keyframes shine {
+
+.trash{
+  padding-left: 1em;
+  animation: shine 2000ms linear 1;
+ }
+
+@keyframes shine {
 	0% {
 		transform: translateX(20%);
 	}
 	100% {
 		transform: translateX(0%);
 	}
-} */
-
-
+}
 
 
 .brPage {

@@ -129,8 +129,6 @@ class StudentsContainer extends React.Component {
   }
 
   renderStudent=()=>{
-    console.log("hey",this.props);
-    debugger
       return this.renderSearch().map(s => <StudentCard student={s} key ={s.id} handleClick={this.handleCardClick}/>)
   }
 

@@ -1,8 +1,9 @@
 import React from "react";
+import { Icon } from 'semantic-ui-react'
+
 
 const Period = (props) => {
 const {period} = props
-console.log("period", props);
 
 const capitalize=(s)=>{
  if (typeof s !== 'string'){ return ''}
@@ -13,6 +14,16 @@ const capitalize=(s)=>{
   }
   return splitStr.join(' '); }
 }
+
+// const periodDelete=()=>{
+//   fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/periods/${props.period.id}`,
+//   {method: 'DELETE'});
+
+//   console.log("jey",props)
+//   console.log(document.getElementById(props.id))
+
+// }
+
 
 let num;
 switch (period.period_num) {
@@ -30,15 +41,23 @@ return (
   <React.Fragment>
      {/*period.teacher.name*/}
      <br/>
-  <div className="periodCard" onClick={()=>props.handleClick(props.period)}>
-  <h4>
-  <span style={{paddingLeft:"1em", paddingRight:".2em" }}> {num}</span>
-  {' '}{' |'}
-  <span style={{paddingLeft:".2em"}}> {capitalize(period.classname)} </span>
-  <span> {period.duration} min</span>
-  <span> {!!period.students.length? `${period.students.length}students `: null} </span>
-  </h4>
-  </div>
+     <div className="periodCard" id={period.id}>
+
+        <section onClick={()=>props.handleClick(props.period)}>
+          <h4>
+          <span style={{paddingLeft:"1em", paddingRight:".2em" }}> {num}</span>
+          {' '}{' |'}
+          <span style={{paddingLeft:".2em"}}> {capitalize(period.classname)} </span>
+          <span> {period.duration} min</span>
+          <span> {!!period.students.length? `${period.students.length}students `: null} </span>
+          </h4>
+        </section>
+
+        <section className='trash'>
+        <Icon name='trash alternate outline icon' id={period.id} onClick={props.periodDelete}/>
+        </section>
+
+    </div>
   </React.Fragment>
 )
 }

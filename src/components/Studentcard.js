@@ -78,6 +78,5 @@ class StudentCard extends React.Component {
 
 
 
-
 export default connect()(StudentCard);
 // export default StudentCard

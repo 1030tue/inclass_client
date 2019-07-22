@@ -136,7 +136,7 @@ class TripCard extends React.Component {
 
 
 const mapStateToProps = state => {
-  console.log('hey',state.bathroomReducer.timer);
+  // console.log('hey',state.bathroomReducer.timer);
   return {
     cardTimer: state.bathroomReducer.cardTimer,
     state: state

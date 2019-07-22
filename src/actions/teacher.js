@@ -46,9 +46,8 @@ export const loginTeacher = (email, password) => {
 }
 
 export const fetchCurrentTeacher = () => {
-  // takes the token in localStorage and finds out who it belongs to
   return (dispatch) => {
-    dispatch(authenticatingTeacher()) //tells the app we are fetching
+    dispatch(authenticatingTeacher())
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/profile`, {
       method: 'GET',
       headers: {
@@ -65,6 +64,11 @@ export const setCurrentTeacher = (teacherData) => ({
   payload: teacherData
 })
 
+export const deletePeriod = (periodData) => ({
+  type: 'DELETE_PERIOD',
+  payload: periodData
+})
+
 export const failedLogin = (errorMsg) => ({
   type: 'FAILED_LOGIN',
   payload: errorMsg
@@ -72,9 +76,6 @@ export const failedLogin = (errorMsg) => ({
 
 // tell our app we're currently fetching
 export const authenticatingTeacher = () => ({ type: 'AUTHENTICATING_TEACHER' })
-// export const authenticatingTeacher = () => {
-//   return { type: 'AUTHENTICATING_TEACHER' }
-// }
 
 
 
