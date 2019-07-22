@@ -1,4 +1,4 @@
-## discription
+## Discription
 In-Class is a classroom management app for teachers.
 By using this app, teachers will be able to
 add their classes,
