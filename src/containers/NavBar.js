@@ -63,6 +63,7 @@ class NavBar extends React.Component {
         </div>
         {!this.props.loggedIn ?
         <div className="navbar-name">
+            <span> <Link to="/teacher/login" style={{ textDecoration: 'none', color:'white'}}>|Login|  </Link> </span>
             <span> <Link to="/teacher/new" style={{ textDecoration: 'none', color:'white'}}>|SignUp|  </Link> </span>
         </div>
         : null }
