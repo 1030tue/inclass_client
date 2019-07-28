@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
+
 import NavBar from "./Containers/NavBar";
 import NewStudentForm from "./Components/NewStudentForm";
 import About from "./Components/About"
@@ -12,7 +13,6 @@ import TeacherContainer from "./Containers/TeacherContainer"
 import StudentsContainer from "./Containers/StudentsContainer"
 
 // import StudentsContainer from "./Containers/StudentsContainer"
-
 // import {saveTeacher} from './actions';
 import Signup from "./Components/Signup"
 import Login from "./Components/Login"

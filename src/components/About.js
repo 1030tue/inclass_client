@@ -5,7 +5,7 @@ class About extends React.Component{
   render(){
     return(
     <div className="about">
-      <header class="info-details">
+      <header className="info-details">
     <h1 className="title-name">Kate Kim</h1>
     <h2><a href="https://github.com/1030tue" target="_blank" className="nice-link"><i className="github square icon"></i></a>
     <a href="https://www.linkedin.com/in/katekim5809" target="_blank" className="nice-link"><i class="linkedin icon"></i></a></h2>
