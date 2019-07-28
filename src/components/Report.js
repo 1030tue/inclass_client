@@ -21,6 +21,7 @@ componentDidMount(){
 }
 
 findTrips=()=>{
+  console.log(this.state);
   if(this.state.trips){
     return this.state.trips.filter(t=>t.period_id===this.props.currentClass.id)}else{return null}
 }
