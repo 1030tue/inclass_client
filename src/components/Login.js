@@ -2,8 +2,6 @@ import React from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-// import { SAVE_TEACHER } from "../actions/ActionTypes";
-// import {saveTeacher} from '../actions';
 import { loginTeacher } from '../actions/teacher'
 
 import './Login.css';
@@ -27,8 +25,8 @@ class Login extends React.Component {
 
   handleLoginSubmit = (e) => {
   e.preventDefault()
-  this.props.loginTeacher(this.state.email, this.state.password) //comes from mapDispatchToProps
-  this.setState({ email: '', password: '' }) //reset form to initial state
+  this.props.loginTeacher(this.state.email, this.state.password)
+  this.setState({ email: '', password: '' })
 }
 
 
@@ -39,7 +37,6 @@ class Login extends React.Component {
       backgroundImage: `url(${Background})`
     };
 
-    // console.log('%c LOGIN FORM PROPS: ', 'color: red', this.state)
     return this.props.loggedIn ? (
       <Redirect to="/" />
     ) : (

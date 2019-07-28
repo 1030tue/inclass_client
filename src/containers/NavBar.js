@@ -1,4 +1,6 @@
 import React from "react";
+import { Dropdown, Menu } from 'semantic-ui-react'
+
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -8,7 +10,7 @@ import { connect } from "react-redux";
 class NavBar extends React.Component {
   logOut = () => {
 		localStorage.removeItem("jwt")}
-    
+
     todayDate = ()=>{
       let newDate = new Date()
       let month = newDate.getMonth();
@@ -24,11 +26,13 @@ class NavBar extends React.Component {
 
             case 31:
                 return `0${newMon[month]} ${date}st, ${year}`;
-
             case 2:
                 return `0${newMon[month]} ${date}nd, ${year}`;
-
+            case 22:
+                return `0${newMon[month]} ${date}nd, ${year}`;
             case 3:
+                return `0${newMon[month]} ${date}rd, ${year}`;
+            case 23:
                 return `0${newMon[month]} ${date}rd, ${year}`;
 
             default:
@@ -41,9 +45,11 @@ class NavBar extends React.Component {
   render(){
     return(
       <div className="topnav">
-      <div className="navbar-name">
-          <span> {this.props.teacher ? this.todayDate(''):null} </span>
 
+      <div className="navbar-name">
+      <span><Link to ="/about">About</Link></span>
+
+          <span> {this.props.teacher ? this.todayDate(''):null} </span>
               <span> <Link to="/teacher" style={{ textDecoration: 'none', color:'white'}}>{this.props.teacher ? this.props.teacher.fullname: null}</Link></span>
 
       </div>
@@ -57,7 +63,7 @@ class NavBar extends React.Component {
         </div>
         {!this.props.loggedIn ?
         <div className="navbar-name">
-            <span>  <Link to="/teacher/new" style={{ textDecoration: 'none', color:'white'}}>|SignUp|  </Link> </span>
+            <span> <Link to="/teacher/new" style={{ textDecoration: 'none', color:'white'}}>|SignUp|  </Link> </span>
         </div>
         : null }
       </div>

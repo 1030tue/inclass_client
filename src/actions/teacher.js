@@ -1,17 +1,11 @@
-
 export const loginTeacher = (email, password) => {
   return (dispatch) => {
-    // console.log(process.env.REACT_APP_API_ENDPOINT)
     dispatch({ type: 'AUTHENTICATING_TEACHER' })
-    // dispatch(authenticatingTeacher())
-    // fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`)
-    // adapter.loginTeacher(email, password)
-    // http://localhost:3000
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
-      method: 'POST',
+      method: 'post',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+         Accept: 'application/json'
       },
       body: JSON.stringify({
         teacher: {
@@ -27,23 +21,15 @@ export const loginTeacher = (email, password) => {
           throw response
         }
       })
-      /* { teacher:
-        { email: 'chandler bing', bio: '', avatar: ''},
-        jwt: 'aaaaaaaaaaaaaaa.bbbbbbbbbbbbbbbbbbbbb.ccccccccccccccccccc'
-      } */
       .then(JSONResponse => {
-        console.log('%c INSIDE jsonResponse .THEN', 'color: navy')
-        localStorage.setItem('jwt', JSONResponse.jwt) // the magic place to keep our token
-        dispatch({ type: 'SET_CURRENT_TEACHER', payload: JSONResponse.teacher })
-
+        console.log('%c INSIDE YE OLDE .THEN', 'color: navy')
+        localStorage.setItem('jwt', JSONResponse.jwt)
+        dispatch({ type: 'SET_CURRENT_TEACHER', payload: JSONResponse.adopter })
       })
       .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
-      // .then((jsonResponse) => {
-      //   localStorage.setItem('jwt', jsonResponse.jwt)
-      //   dispatch(setCurrentTeacher(jsonResponse.teacher))
-      // })
   }
 }
+
 
 export const fetchCurrentTeacher = () => {
   return (dispatch) => {
@@ -74,7 +60,6 @@ export const failedLogin = (errorMsg) => ({
   payload: errorMsg
 })
 
-// tell our app we're currently fetching
 export const authenticatingTeacher = () => ({ type: 'AUTHENTICATING_TEACHER' })
 
 

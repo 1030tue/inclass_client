@@ -5,7 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 import NavBar from "./Containers/NavBar";
 import NewStudentForm from "./Components/NewStudentForm";
-
+import About from "./Components/About"
 // import ClassPage from "./Containers/ClassPage";
 import Home from "./Containers/Home";
 import TeacherContainer from "./Containers/TeacherContainer"
@@ -37,7 +37,7 @@ class App extends React.Component{
            <Route path='/class/new' render={(routeProps) => <NewPeriod {...routeProps} />} />
            <Route exact path='/students/new' component={NewStudentForm} />
            <Route exact path='/' component={Home} />
-
+           <Route exact path="/about" component={About} />
            <Route path="/class" component={StudentsContainer}/>
            </Switch>
 

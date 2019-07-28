@@ -17,7 +17,6 @@
 
 export const setCurrentClass = (periodInfo) => {
   return (dispatch) =>{
-    // localStorage.setItem('class', periodInfo);
     dispatch({ type: 'SET_CURRENT_CLASS', payload: periodInfo })
   }
 }

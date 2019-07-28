@@ -35,7 +35,7 @@ class Dropdown extends React.Component{
           })
         }).then(res=>res.json())
         .then(data=>{
-          console.log("dropdown",data);
+          // console.log("dropdown",data);
           this.props.addStudent(this.state.all.find(s=>s.id===data.student_id))
           this.props.history.push("/class")})
   }
@@ -43,7 +43,7 @@ class Dropdown extends React.Component{
 
   render(){
     // debugger
-    console.log(this.props);
+    // console.log(this.props);
     let optionItems = this.allNotInCass().map((stdnt) =>
                <option value={stdnt.id}>{stdnt.firstname}{' '}{stdnt.lastname}</option>)
     return(
