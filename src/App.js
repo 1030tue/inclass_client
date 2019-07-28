@@ -19,9 +19,6 @@ import Login from "./Components/Login"
 import NewPeriod from "./Components/NewPeriod"
 
 
-// <Route exact path='/class' render={() => <ClassPage
-// periods={this.state.periods}/>} />
-
 
 class App extends React.Component{
   render(){

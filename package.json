@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "REACT_APP_BASE_URL=https://evening-oasis-90118.herokuapp.com/ NODE_ENV=production react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
