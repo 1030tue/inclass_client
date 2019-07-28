@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 
-import NavBar from "./Containers/NavBar";
+import NavBar from "./containers/NavBar";
 import NewStudentForm from "./Components/NewStudentForm";
 import About from "./Components/About"
 // import ClassPage from "./Containers/ClassPage";
