@@ -24,7 +24,6 @@ const withAuth =  (WrappedComponent) => {
       return(
         <div className="App-logo-div">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2 style={{paddingLeft:"5em"}}> &nbsp;&nbsp;&nbsp; Loading...</h2>
         </div>
       )
     }
@@ -50,11 +49,11 @@ const withAuth =  (WrappedComponent) => {
     }
   }
 
-  const mapDispatchToProps =  (dispatch) => {
-    return {
-      fetchCurrentTeacher: () => dispatch(fetchCurrentTeacher()),
-    }
-  }
+  // const mapDispatchToProps =  (dispatch) => {
+  //   return {
+  //     fetchCurrentTeacher: () => dispatch(fetchCurrentTeacher()),
+  //   }
+  // }
 
 
   return connect(mapStateToProps, { fetchCurrentTeacher })(AuthorizedComponent)
