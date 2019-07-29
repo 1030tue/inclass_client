@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Period from "../Components/Period"
+import Period from "../components/Period"
 import { setCurrentClass } from '../actions/bathroom'
 import { deletePeriod } from '../actions/teacher'
 import withAuth from '../hocs/withAuth'

@@ -5,18 +5,18 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import './App.css';
 
 import NavBar from "./containers/NavBar";
-import NewStudentForm from "./Components/NewStudentForm";
-import About from "./Components/About"
-// import ClassPage from "./Containers/ClassPage";
-import Home from "./Containers/Home";
-import TeacherContainer from "./Containers/TeacherContainer"
-import StudentsContainer from "./Containers/StudentsContainer"
+import NewStudentForm from "./components/NewStudentForm";
+import About from "./components/About"
+// import ClassPage from "./containers/ClassPage";
+import Home from "./containers/Home";
+import TeacherContainer from "./containers/TeacherContainer"
+import StudentsContainer from "./containers/StudentsContainer"
 
-// import StudentsContainer from "./Containers/StudentsContainer"
+// import StudentsContainer from "./containers/StudentsContainer"
 // import {saveTeacher} from './actions';
-import Signup from "./Components/Signup"
-import Login from "./Components/Login"
-import NewPeriod from "./Components/NewPeriod"
+import Signup from "./components/Signup"
+import Login from "./components/Login"
+import NewPeriod from "./components/NewPeriod"
 
 
 

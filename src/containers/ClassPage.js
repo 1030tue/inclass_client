@@ -1,5 +1,5 @@
 import React from "react";
-import Period from "../Components/Period"
+import Period from "../components/Period"
 import StudentsContainer from "./StudentsContainer"
 
 import { Link } from "react-router-dom";

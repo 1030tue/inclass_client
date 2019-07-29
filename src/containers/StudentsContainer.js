@@ -1,9 +1,9 @@
 import React from "react";
-import StudentCard from "../Components/Studentcard"
+import StudentCard from "../components/Studentcard"
 import BathroomPage from "./BathroomPage"
-import Second from "../Components/Second"
-import Sort from "../Components/Sort"
-import Dropdown from "../Components/Dropdown"
+import Second from "../components/Second"
+import Sort from "../components/Sort"
+import Dropdown from "../components/Dropdown"
 
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";

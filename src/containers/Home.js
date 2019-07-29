@@ -5,19 +5,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import withAuth from '../hocs/withAuth'
 // import StudentsContainer from "./StudentsContainer"
-import Report from '../Components/Report'
+import Report from '../components/Report'
 
 class Home extends React.Component {
   state={
     clicked: null
   }
 
-  handleClick=()=>{
-    console.log("hi");
-    // this.setState({
-    //   clicked: props
-    // })
-  }
 
   renderWelcome=()=>{
     return(!!this.props.currentTeacher ? `Welcome, ${this.props.currentTeacher.fullname}`: "Hi! Starnager")

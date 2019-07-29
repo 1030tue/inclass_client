@@ -18,32 +18,32 @@ class SMSForm extends Component {
 
   onSubmit(event) {
     event.preventDefault();
-    this.setState({ submitting: true });
-    fetch('/api/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state.message)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          this.setState({
-            error: false,
-            submitting: false,
-            message: {
-              to: '',
-              body: ''
-            }
-          });
-        } else {
-          this.setState({
-            error: true,
-            submitting: false
-          });
-        }
-      });
+    // this.setState({ submitting: true });
+    // fetch('/api/messages', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(this.state.message)
+    // })
+    //   .then(res => res.json())
+    //   .then(data => {
+    //     if (data.success) {
+    //       this.setState({
+    //         error: false,
+    //         submitting: false,
+    //         message: {
+    //           to: '',
+    //           body: ''
+    //         }
+    //       });
+    //     } else {
+    //       this.setState({
+    //         error: true,
+    //         submitting: false
+    //       });
+    //     }
+    //   });
   }
 
   onHandleChange(event) {

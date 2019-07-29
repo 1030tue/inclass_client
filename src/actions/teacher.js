@@ -1,6 +1,7 @@
 export const loginTeacher = (email, password) => {
   return (dispatch) => {
     dispatch({ type: 'AUTHENTICATING_TEACHER' })
+    // debugger
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
       method: 'post',
       headers: {
@@ -26,7 +27,7 @@ export const loginTeacher = (email, password) => {
         localStorage.setItem('jwt', JSONResponse.jwt)
         dispatch({ type: 'SET_CURRENT_TEACHER', payload: JSONResponse.adopter })
       })
-      .catch(r => r.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
+      .catch(res => res.json().then(e => dispatch({ type: 'FAILED_LOGIN', payload: e.message })))
   }
 }
 

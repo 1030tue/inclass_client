@@ -6,7 +6,7 @@ import { removeBrStudent, updateClass } from '../actions/bathroom'
 
 import withAuth from '../hocs/withAuth'
 
-import TripCard from '../Components/TripCard'
+import TripCard from '../components/TripCard'
 
 class BathroomPage extends React.Component {
 
