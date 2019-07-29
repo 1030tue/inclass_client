@@ -21,7 +21,7 @@ class Home extends React.Component {
 
   render(){
     if(!this.props.currentTeacher){
-      return "hi "
+      window.location.reload();
     }else{
       const numClass = this.props.currentTeacher.periods.length
     return(

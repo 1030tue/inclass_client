@@ -67,6 +67,7 @@ class StudentCard extends React.Component {
 
 
   render(){
+    console.log("??",this.props.student.inclass);
     return(
       <React.Fragment>
       {this.renderStudent(this.props.student)}
