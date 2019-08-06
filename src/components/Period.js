@@ -19,8 +19,8 @@ const capitalize=(s)=>{
 //   fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/periods/${props.period.id}`,
 //   {method: 'DELETE'});
 
-//   console.log("jey",props)
-//   console.log(document.getElementById(props.id))
+//   //console.log("jey",props)
+//   //console.log(document.getElementById(props.id))
 
 // }
 

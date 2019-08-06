@@ -18,7 +18,7 @@ class TeacherContainer extends React.Component {
   }
 
   periodDelete = (e) => {
-    console.log("1",this.props.currentTeacher.periods);
+    //console.log("1",this.props.currentTeacher.periods);
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/periods/${e.target.id}`,
       { method: 'DELETE' })
     this.props.deletePeriod(e.target.id)
@@ -36,7 +36,7 @@ class TeacherContainer extends React.Component {
 
 
   render(){
-    console.log("techaercon",this.props)
+    //console.log("techaercon",this.props)
     return(
       <React.Fragment>
           <div className="period">{this.renderPeriodCards()}

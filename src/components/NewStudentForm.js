@@ -60,7 +60,7 @@ class NewStudentForm extends React.Component{
 
 
   render(){
-    console.log(this.props);
+    //console.log(this.props);
     return(
       <div className="NewStudentForm">
       <form onSubmit={this.handleSubmit}>
@@ -160,7 +160,7 @@ class NewStudentForm extends React.Component{
 }
 
 const mapStateToProps = state => {
-  console.log("inside mapstate", state.bathroomReducer);
+  //console.log("inside mapstate", state.bathroomReducer);
   return {
     currentTeacher: state.teacherReducer.teacher,
     currentClass: state.bathroomReducer.curr_class,

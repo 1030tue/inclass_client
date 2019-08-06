@@ -23,7 +23,7 @@ class Signup extends React.Component {
 
 
   handleSignupChange = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     this.setState({
       signup: {
         ...this.state.signup,
@@ -43,7 +43,7 @@ class Signup extends React.Component {
       })
       .then(res => res.json())
       .then((data) => {
-        console.log(data)
+        //console.log(data)
         if (data.message){
           alert(data.message);
           this.props.history.push("/teacher/new")
@@ -111,7 +111,7 @@ class Signup extends React.Component {
 
 
 const mapStateToProps = state => {
-  console.log("state from REDUX", state);
+  //console.log("state from REDUX", state);
   // return {
   //   name: "Kate"
   // };

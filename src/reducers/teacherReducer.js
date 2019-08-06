@@ -11,10 +11,10 @@ const teacherReducer = (state=defaultState, action) => {
     case 'SAVE_TEACHER':
       return { ...state, teacher: action.payload, loggedIn: false, authenticatingTeacher: true }
     case 'SET_CURRENT_TEACHER':
-    console.log("??", state.teacher);
+    //console.log("??", state.teacher);
       return { ...state, teacher: action.payload, loggedIn: true, authenticatingTeacher: false }
     case 'DELETE_PERIOD':
-    console.log("?", state.teacher.periods);
+    //console.log("?", state.teacher.periods);
     return {
       ...state,
       teacher: {

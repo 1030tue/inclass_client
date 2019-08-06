@@ -22,7 +22,7 @@ export const loginTeacher = (email, password) => {
         }
       })
       .then(JSONResponse => {
-        console.log('%c INSIDE YE OLDE .THEN', 'color: navy')
+        //console.log('%c INSIDE YE OLDE .THEN', 'color: navy')
         localStorage.setItem('jwt', JSONResponse.jwt)
         dispatch({ type: 'SET_CURRENT_TEACHER', payload: JSONResponse.adopter })
       })
@@ -89,7 +89,7 @@ export const authenticatingTeacher = () => ({ type: 'AUTHENTICATING_TEACHER' })
 //       })
 //       .then(res => res.json())
 //       .then((data) => {
-//         console.log(data)
+//         //console.log(data)
 //         if (data.message){
 //           alert(data.message);
 //           this.props.history.push("/teacher/new")

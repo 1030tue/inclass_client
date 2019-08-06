@@ -22,7 +22,7 @@ export default function bathroomReducer(state=initialState, action){
               })
               const updatedState = {...state}
               updatedState.curr_class.students = updatedClass
-              console.log("state", updatedState)
+              //console.log("state", updatedState)
               return updatedState
           case 'DELETE_STUDENT':
               return {

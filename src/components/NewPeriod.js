@@ -56,7 +56,7 @@ class NewPeriod extends React.Component{
 
 
   render(){
-    console.log(this.props)
+    //console.log(this.props)
     return(
       <div className={NewPeriod} style={{paddingLeft: '3em', paddingTop: '3em'}}>
       <form onChange={this.handleChange}>

@@ -65,7 +65,7 @@ class StudentUpdate extends React.Component {
 
 
     renderForm=(student)=>{
-      console.log(this.props.student.id);
+      //console.log(this.props.student.id);
     return (
               <React.Fragment>
                   <form onSubmit={this.handleSubmit}>
@@ -106,7 +106,7 @@ class StudentUpdate extends React.Component {
 
 
   render(){
-    console.log(this.props);
+    //console.log(this.props);
     return(
       <React.Fragment>
       {this.renderForm(this.props.student)}

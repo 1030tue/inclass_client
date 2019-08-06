@@ -62,7 +62,7 @@ class TripCard extends React.Component {
   }
 
   seconds=()=>{
-    console.log("hi", this.state);
+    //console.log("hi", this.state);
     // this.props.cardTimer(this.state.elapsedTime)
     if(!this.state.second){
       return "0"
@@ -82,7 +82,7 @@ class TripCard extends React.Component {
 
 
   renderStudent=(student)=>{
-    console.log(student);
+    //console.log(student);
       let destination = this.props.student.trips[this.props.student.trips.length-1].destination
 
       let tripCardstyle;
@@ -135,7 +135,7 @@ class TripCard extends React.Component {
 
 
 const mapStateToProps = state => {
-  // console.log('hey',state.bathroomReducer.timer);
+  // //console.log('hey',state.bathroomReducer.timer);
   return {
     // cardTimer: state.bathroomReducer.cardTimer,
     state: state

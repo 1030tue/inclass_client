@@ -174,7 +174,7 @@ class StudentsContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("hello2", state)
+  //console.log("hello2", state)
   return {
     currentClass: state.bathroomReducer.curr_class,
     timer: state.bathroomReducer.timer,

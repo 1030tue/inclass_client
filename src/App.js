@@ -32,7 +32,7 @@ class App extends React.Component{
     // }
 
   render(){
-    // console.log('%c APP Props: ', 'color: firebrick', this.props)
+    // //console.log('%c APP Props: ', 'color: firebrick', this.props)
     return(
       <div>
           <NavBar />
@@ -54,7 +54,7 @@ class App extends React.Component{
 
 
 // const mapStateToProps = state => {
-//   // console.log(state.teacherReducer);
+//   // //console.log(state.teacherReducer);
 //   return {
 //     currentTeacher:state.teacherReducer.teacher,
 //     currentClass: state.bathroomReducer.curr_class,

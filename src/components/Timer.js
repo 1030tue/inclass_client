@@ -65,7 +65,7 @@ class Timer extends React.Component {
   }
 
   seconds=()=>{
-    console.log("hi", this.state.elapsedTime);
+    //console.log("hi", this.state.elapsedTime);
     this.props.cardTimer(this.state.elapsedTime)
     if(!this.state.second){
       return "0"
@@ -79,7 +79,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    console.log(this.state.elapsedTime);
+    //console.log(this.state.elapsedTime);
     return (
     <React.Fragment>
         <span className="timer">
