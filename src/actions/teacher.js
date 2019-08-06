@@ -1,7 +1,6 @@
 export const loginTeacher = (email, password) => {
   return (dispatch) => {
     dispatch({ type: 'AUTHENTICATING_TEACHER' })
-    // debugger
     fetch(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/login`, {
       method: 'post',
       headers: {

@@ -20,7 +20,6 @@ import 'semantic-ui-css/semantic.min.css'
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
-
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>

@@ -3,6 +3,7 @@ import { Link, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { loginTeacher } from '../actions/teacher'
+import ShowPopup from './ShowPopup'
 
 import './Login.css';
 import Background from '../img/bg.jpg';
@@ -12,8 +13,17 @@ class Login extends React.Component {
 
   state = {
         email: '',
-        password: ''
+        password: '',
+        active: true
   }
+
+  togglePopup = (e)=>{
+
+    this.setState({
+       active: !this.state.active
+    });
+  }
+
 
   handleLoginChange = (e) => {
     this.setState({
@@ -36,13 +46,13 @@ class Login extends React.Component {
       height: "700px",
       backgroundImage: `url(${Background})`
     };
-
     return this.props.loggedIn ? (
       <Redirect to="/" />
     ) : (
        <section style={ sectionStyle }>
-      <div className="login-form" >
-              <h1 style={{fontColor:"transparent"}}>In-Class</h1>
+       {this.state.active? <ShowPopup error header={this.props.error} close={this.togglePopup}/> : null}
+      <div className="login-form" style={ this.props.failedLogin? {backgroundColor: "#cc6666"}:null}>
+              <h1>In-Class</h1>
               <form onSubmit={this.handleLoginSubmit}>
                <div className="form-group ">
                  <input type="text" className="form-control" name="email"
@@ -57,6 +67,7 @@ class Login extends React.Component {
                  value={this.password}
                  onChange={this.handleLoginChange}/>
                </div>
+               <p style={{fontWeight: "bold"}}>{this.props.failedLogin? this.props.error:null}</p>
                 <span className="alert">Invalid Credentials</span>
                 <p className="link" >Lost your password?</p>
                <button type="submit" className="log-btn">Log in</button>
@@ -73,13 +84,12 @@ class Login extends React.Component {
 }
 
 
-
-const mapStateToProps = ({ teacherReducer: { authenticatingTeacher, failedLogin, error, loggedIn } }) => ({
-  authenticatingTeacher,
-  failedLogin,
-  error,
-  loggedIn
-})
+  const mapStateToProps = ({ teacherReducer: { authenticatingTeacher, failedLogin, error, loggedIn } }) => ({
+    authenticatingTeacher,
+    failedLogin,
+    error,
+    loggedIn
+  })
 
 
 export default withRouter(connect(mapStateToProps, { loginTeacher })(Login))

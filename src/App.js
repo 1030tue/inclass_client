@@ -7,6 +7,7 @@ import './App.css';
 import NavBar from "./containers/NavBar";
 import NewStudentForm from "./components/NewStudentForm";
 import About from "./components/About"
+// import Popup from './components/Popup';
 // import ClassPage from "./containers/ClassPage";
 import Home from "./containers/Home";
 import TeacherContainer from "./containers/TeacherContainer"
@@ -21,14 +22,23 @@ import NewPeriod from "./components/NewPeriod"
 
 
 class App extends React.Component{
+    // state = { showPopup: false };
+    //
+    //
+    // togglePopup=()=>{
+    // this.setState({
+    //     showPopup: !this.state.showPopup
+    // });
+    // }
+
   render(){
-    console.log('%c APP Props: ', 'color: firebrick', this.props)
+    // console.log('%c APP Props: ', 'color: firebrick', this.props)
     return(
       <div>
-        <NavBar />
+          <NavBar />
+
           <Switch>
            <Route exact path='/teacher' component={TeacherContainer} setCurrentTeacher={this.setCurrentTeacher}/>
-
            <Route exact path='/teacher/new' component={Signup} />
            <Route exact path='/teacher/login' component={Login} />
            <Route path='/class/new' render={(routeProps) => <NewPeriod {...routeProps} />} />
@@ -37,20 +47,19 @@ class App extends React.Component{
            <Route exact path="/about" component={About} />
            <Route path="/class" component={StudentsContainer}/>
            </Switch>
-
       </div>
     )
   }
 }
 
 
-const mapStateToProps = state => {
-  console.log(state.teacherReducer);
-  return {
-    currentTeacher:state.teacherReducer.teacher,
-    currentClass: state.bathroomReducer.curr_class,
-    state:state
-  };
-};
+// const mapStateToProps = state => {
+//   // console.log(state.teacherReducer);
+//   return {
+//     currentTeacher:state.teacherReducer.teacher,
+//     currentClass: state.bathroomReducer.curr_class,
+//     state:state
+//   };
+// };
 
 export default withRouter(connect()(App))

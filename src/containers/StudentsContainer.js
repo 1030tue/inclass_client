@@ -36,6 +36,7 @@ class StudentsContainer extends React.Component {
 
 
   handleCardClick=(props, e)=>{
+    debugger
     if(!this.props.timer){
       alert("Start the timer first ")
     }else if(this.props.timer >= parseInt(this.props.currentClass.duration)*60 - 10*60){
